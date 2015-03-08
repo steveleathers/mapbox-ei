@@ -12,8 +12,32 @@
   <body>
     <div id='map-one' class='map'> </div>
     <script>
+      geoJson = [{
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.760366048812866,
+                45.549784666877921
+              ]
+            },
+            "properties": {
+              "title": "Forest Park",
+              "marker-color": "#9c89cc",
+              "marker-size": "medium",
+              "marker-symbol": "park"
+            }
+          }
+        ]
+      }];
       L.mapbox.accessToken = 'pk.eyJ1IjoibWlnY29tIiwiYSI6ImNrUllYc3MifQ.isgDkadcGHvdQKkSC1ohfQ';
-      L.mapbox.map('map-one', 'examples.map-i86l3621', {scrollWheelZoom: false}).setView([45.54, -122.6879], 12);
+      var map = L.mapbox.map('map-one', 'examples.map-i86l3621', {scrollWheelZoom: false, legendControl:{position: 'bottomright'}}).setView([45.54, -122.6879], 12);
+      var myLayer = L.mapbox.featureLayer().addTo(map);
+      myLayer.setGeoJSON(geoJson);
+      map.legendControl.addLegend('<strong>Legend content</strong>');
     </script>
   </body>
 </html>
